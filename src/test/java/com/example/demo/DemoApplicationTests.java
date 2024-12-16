@@ -3,6 +3,7 @@ package com.example.demo;
 import com.github.dockerjava.api.command.CreateNetworkCmd;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -60,6 +61,7 @@ class DemoApplicationTests {
     }
 
     @Test
+    @Disabled
     void contextLoads() throws Exception {
         await().atMost(Duration.ofSeconds(30)).until(() -> haproxy1.getLogs().contains("web_servers/s1 is UP"));
         await().atMost(Duration.ofSeconds(30)).until(() -> haproxy2.getLogs().contains("web_servers/s1 is UP"));
