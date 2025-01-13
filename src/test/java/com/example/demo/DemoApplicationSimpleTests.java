@@ -16,7 +16,7 @@ class DemoApplicationSimpleTests {
                 // working url, bypasses gateway
                 //.uri("/test")
                 .uri("/testgateway")
-                .header("X-Forwarded-For", "fd00:fefe:1::4")
+                .header("Forwarded", "for=[fd00:fefe:1::4]")
                 .exchange()
                 .expectStatus()
                 .isOk();
