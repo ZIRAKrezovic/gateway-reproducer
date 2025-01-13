@@ -78,6 +78,6 @@ class DemoApplicationTests {
 
         log.info("\n{}", haproxy1.execInContainer("/bin/sh", "-c", "/usr/local/sbin/haproxy -vv").getStdout());
 
-        Assertions.assertTrue(out.contains("Hello World"));
+        Assertions.assertTrue(out.contains("fd00:fefe:1::4"));
     }
 }
