@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.testcontainers.containers.BindMode;
@@ -20,6 +22,8 @@ import static org.awaitility.Awaitility.await;
 @TestConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class DemoApplicationTests {
+    private static final Logger log = LoggerFactory.getLogger(DemoApplicationTests.class);
+
     static Consumer<CreateNetworkCmd> createNetworkCmd;
 
     static {
@@ -71,6 +75,8 @@ class DemoApplicationTests {
 
         // with gateway
         var out = alpine.execInContainer("/bin/sh", "-c", "curl -v6 http://haproxy:8080/testgateway").getStdout();
+
+        log.info("\n{}", haproxy1.execInContainer("/bin/sh", "-c", "/usr/local/sbin/haproxy -vv").getStdout());
 
         Assertions.assertTrue(out.contains("Hello World"));
     }
